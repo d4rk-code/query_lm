@@ -31,7 +31,6 @@ def chat():
 
         response = summarized
 
-
     return render_template(
         "chat/chat.html",
         question = user_input,
