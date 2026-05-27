@@ -42,11 +42,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-<<<<<<< HEAD
-### Windows 
-=======
 ### Windows
->>>>>>> 6ba72c53df073fa880aad978b6f757046eaf61ab
 
 ```bash
 python -m venv venv
