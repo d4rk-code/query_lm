@@ -34,54 +34,17 @@ cd query_lm
 ## 2. Create a Virtual Environment 
 
 ### Linux/ macOS
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Windows 
-```bash
-python -m venv venv
-venv\Scripts\activate
-'''
+## 3. Install Dependencies 
 
-## 3. Install Dependencies
 ```bash
 pip install flask anthropic mysql-connector-python python-dotenv
 '''
-
-# Environmental Variables
-create a .env file in the root directory of the project.
-
-###Example:
-
-```
-key=YOUR_ANTHROPIC_API_KEY
-user=YOUR_DATABASE_USER
-password=YOUR_DATABASE_PASSWORD
-database=YOUR_DATABASE_NAME
-```
-
-# Variable Descriptions 
-
-| Variable   | Description                     |
-| ---------- | ------------------------------- |
-| `key`      | Anthropic API key               |
-| `user`     | MariaDB/MySQL database username |
-| `password` | Database password               |
-| `database` | Database name                   |
-
-
-# Running the Application
-
-Start the flask server:
-
-```bash
-python app.py
-```
-
-
-
 
 
 
