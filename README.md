@@ -31,40 +31,52 @@ git clone https://github.com/d4rk-code/query_lm.git
 cd query_lm
 ```
 
-## 2. Create a Virtual Environment 
+---
 
-### Linux/ macOS
+## 2. Create a Virtual Environment
+
+### Linux / macOS
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
+<<<<<<< HEAD
 ### Windows 
+=======
+### Windows
+>>>>>>> 6ba72c53df073fa880aad978b6f757046eaf61ab
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
-'''
+```
+
+---
 
 ## 3. Install Dependencies
 
 ```bash
 pip install flask anthropic mysql-connector-python python-dotenv
-'''
+```
+
+---
 
 # Environmental Variables
-create a .env file in the root directory of the project.
 
-###Example:
+Create a `.env` file in the root directory of the project.
 
-```
+### Example:
+
+```env
 key=YOUR_ANTHROPIC_API_KEY
 user=YOUR_DATABASE_USER
 password=YOUR_DATABASE_PASSWORD
 database=YOUR_DATABASE_NAME
 ```
 
-# Variable Descriptions 
+# Variable Descriptions
 
 | Variable   | Description                     |
 | ---------- | ------------------------------- |
@@ -73,17 +85,18 @@ database=YOUR_DATABASE_NAME
 | `password` | Database password               |
 | `database` | Database name                   |
 
+---
 
 # Running the Application
 
-Start the flask server:
+Start the Flask server:
 
 ```bash
 python app.py
 ```
 
+The application will run on:
 
-
-
-
-
+```text
+http://127.0.0.1:5000
+```
