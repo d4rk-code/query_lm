@@ -6,3 +6,6 @@ lib64/
 pyvenv.cfg
 bin/
 db/data_mart_dump.sql
+.gitignore
+AI/__pycache__/
+AI/llm/__pycache__/

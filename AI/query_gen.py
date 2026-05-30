@@ -1,4 +1,5 @@
 from AI.llm.setup import client
+from AI.memory import history
 #from AI.classifier import classify
 #from AI.entity_extractor import extract
 #free model: openai/gpt-oss-20b:free
@@ -16,9 +17,37 @@ def query_generator(Prompt: str, model_name = "claude-sonnet-4-6"):
 
     # prompt formatting 
 
+    context = ""
+
+    if history:
+        max_context = len(history)
+        recent_context = history[-max_context:]
+
+
+        for item in recent_context:
+            context += f"""
+
+                    Previous context for the user: 
+
+                    Question:
+                    {item["question"]}
+
+                    SQL:
+                    {item["sql"]}
+
+                    Summary:
+                    {item["response"]}
+
+                    """
+
     prompt = f"""
 
     You are an expert MariaDB SQL query generator.
+
+    {context}
+
+    User Request: 
+    {Prompt}
 
     Generate ONLY a valid MariaDB SQL query.
 
@@ -81,15 +110,9 @@ def query_generator(Prompt: str, model_name = "claude-sonnet-4-6"):
     - country TEXT
     - zone TEXT
 
-
-    USER REQUEST:
-    {Prompt}
-
     """
-
     # response generation
     try:
-
         response = client.messages.create(
                 model=model_name,
                 max_tokens=1024,

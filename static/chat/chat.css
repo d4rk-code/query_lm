@@ -66,10 +66,13 @@ body {
 
 .response-window {
     width: 100%;
+    height: 520px;         /* FIXED HEIGHT: Keeps container static */
     background-color: #111111;
     border-radius: 20px;
     border: 1px solid #242424;
-    overflow: hidden;
+    overflow: hidden;      
+    display: flex;
+    flex-direction: column; /* Locks header above output viewport */
     box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.12),
         0 1px 3px rgba(0, 0, 0, 0.18);
@@ -82,6 +85,7 @@ body {
     padding: 16px 20px;
     background-color: #161616;
     border-bottom: 1px solid #222222;
+    flex-shrink: 0;        /* Protects title header line from compression */
 }
 
 .dot {
@@ -115,7 +119,7 @@ body {
 .lens-icon {
     width: 100%;
     height: 100%;
-    color: rgba(255, 255, 255, 0.35); /* Restored sharp, clean visual tone */
+    color: rgba(255, 255, 255, 0.35);
     z-index: 2;
 }
 
@@ -149,6 +153,9 @@ body {
     padding: 32px;
     color: #f3f4f6;
     line-height: 1.8;
+    flex-grow: 1;          
+    overflow-y: auto;      /* Dynamically fires a scrollbar if text flows deep */
+    overflow-x: hidden;    
 }
 
 .response-content h3 {
@@ -197,14 +204,13 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 280px; 
+    flex-grow: 1;          
     padding: 40px;
 }
 
-/* Increased size and presence for bolder typographic contrast */
 .welcome-title {
     color: #ffffff;
-    font-size: 38px; /* Increased from 32px */
+    font-size: 38px;
     font-weight: 700;
     letter-spacing: -0.04em;
     margin-bottom: 12px;
@@ -215,6 +221,35 @@ body {
     font-size: 14px;
     max-width: 440px;
     line-height: 1.6;
+}
+
+/* --- FIXED USER QUERY INNER PANEL --- */
+.user-query-box {
+    width: 100%;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #222222; /* Styled to match inside the dark console theme */
+}
+
+.query-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5f5f5f; /* Dark text label context */
+    margin-bottom: 6px;
+}
+
+/* Additional distinct marker class for the AI subtitle block */
+.ai-label {
+    color: #4b5563; 
+}
+
+.query-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #ffffff; /* Sharp white text inside terminal console */
 }
 
 /* --- FORM --- */
@@ -269,56 +304,7 @@ button:active {
     font-size: 18px;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width
-
-
-/* USER QUERY */
-
-.user-query-box {
-    width: 100%;
-    max-width: 820px;
-
-    margin-bottom: 18px;
-
-    padding: 20px 24px;
-
-    background-color: #ffffff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,0.04);
-}
-
-.query-label {
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    letter-spacing: 0.08em;
-
-    text-transform: uppercase;
-
-    color: #6b7280;
-
-    margin-bottom: 10px;
-}
-
-.query-text {
-
-    font-size: 18px;
-
-    font-weight: 500;
-
-    line-height: 1.5;
-
-    color: #111827;
-}
-
+/* --- LOADING EFFECTS --- */
 .loading-text {
     animation: textPulse 1.8s ease-in-out infinite;
 }
@@ -326,4 +312,45 @@ button:active {
 @keyframes textPulse {
     0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
+}
+
+/* --- CUSTOM DARK SCROLLBARS --- */
+.response-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.response-content::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+.response-content::-webkit-scrollbar-thumb {
+    background: #242424;
+    border-radius: 999px;
+}
+
+.response-content::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+}
+
+@supports (scrollbar-color: auto) {
+    .response-content {
+        scrollbar-color: #242424 #111111;
+        scrollbar-width: thin;
+    }
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 1100px) {
+    .layout {
+        flex-direction: column;
+        row-gap: 40px;
+    }
+
+    .hero-heading {
+        font-size: 72px;
+    }
+
+    .content-column {
+        max-width: 100%;
+    }
 }

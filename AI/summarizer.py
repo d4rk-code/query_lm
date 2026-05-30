@@ -31,20 +31,21 @@ def summarize(data, model_name = "claude-sonnet-4-6"):
 
     # response generation
     try:
-        response = client.messages.create(
-                model = model_name,
-                max_tokens=1024,
-                system = "You are an expert data analyst and HTML generator.",
-                messages = [
-                    {
-                        "role": "user",
-                        "content": prompt
-                        }
-                    ])
-
-        return response.content[0].text.strip()
+        with client.messages.stream(
+            model=model_name,
+            max_tokens=1024,
+            system="You are an expert MariaDB SQL query generator.",
+            messages=[
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
+            ]
+        ) as stream:
+            for text in stream.text_stream:
+                yield text 
 
     except Exception as e:
-        return f"error occured: {e}"
+        yield f"error occured: {e}"
 
 
